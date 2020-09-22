@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/54eb0cc4f9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+    <div class="l-header">
+    </div>
+
+    <div id="app" class="l-wrap">
+        <section class="chat">
+            <div v-for="(speaker, index) in chat" :class="[speaker.name, speaker.theme]" class="chat__wrap">
+                <div class="chat__head">
+                    ChatBox
+                    <hr>
+
+                    <b>{{ speaker.name }}</b>
+                </div>
+
+                <div class="chat__body clearfix">
+                    <div v-for="item in msg"
+                        :class="'chat__msgRow--'+(item.sender === speaker.name? 'sent' : 'replier')"
+                        class="chat__msgRow">
+                        <div class="chat__box__senter">{{ item.sender }}</div>
+                        <div class="chat__box__msg">{{ item.message }}</div>
+                        <div class="chat__box__time">{{ item.timestamp }}</div>
+                    </div>
+                </div>
+
+                <div class="chat__text clearfix">
+                    <div class="chat__text__bar">
+                        <input v-model.trim="speaker.say" @keyup.enter="msgHandler(index)" type="text"
+                            placeholder="Message" />
+                    </div>
+                    <button @click="msgHandler(index)" class="chat__text__submit">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="l-footer">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
